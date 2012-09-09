@@ -137,12 +137,12 @@ get '/authorize_page' do
   end
 end
 
-get '/reddit_list' do
+get '/reddit_list/:subreddit' do
   if session[:access_token].nil? or session[:page_token].nil?
     redirect 'authorize_page'
   end
   @graph  = Koala::Facebook::API.new(session[:access_token])
-  @posts = Reddit::Reddit.get_posts('funny').select{|p| p.url.end_with? 'jpg'}
+  @posts = Reddit::Reddit.get_posts(params[:subreddit]).select{|p| p.url.end_with? 'jpg'}
   erb :reddit_list
 end
 
