@@ -1,0 +1,8 @@
+<html>
+<body>
+  <% @pages.each_with_index do |page,i| %>
+<%= page.inspect %>
+<a href='authorize_page?page_id=<%= i %>'>Authorize <%= page['name'] %></a>
+<% end %>
+</body>  
+</html>

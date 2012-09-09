@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script type="text/javascript" src="/javascripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.js-post').click(function(ev){
+           $.post("/fb_submit", { url: $(this).data('url'), title: $(this).data('title') },
+              function(data) {
+                     alert(data);
+              });
+           ev.preventDefault()
+           });
+    })
+</script>
+  </head>
+  <body>
+    <ul>
+      <% @posts.each do |post| %>
+        <li>
+          <img src='<%= post.thumbnail %>' />
+          <a href='<%= post.url %>'><%= post.url %></a>
+          <a href='http://reddit.com<%= post.permalink %>' >
+            <%= post.title %>
+            <button class='js-post' data-url='<%= post.url%>' data-title='<%= post.title  %>' >POST TO FB</button>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
